@@ -367,8 +367,7 @@ resource "aws_launch_template" "ecs_launch_config" {
 resource "aws_autoscaling_group" "ecs_asg" {
   name                 = "ECS-lab-asg"
   vpc_zone_identifier  = [aws_subnet.lab-subnet-public-1.id]
-  #launch_configuration = aws_launch_template.ecs_launch_config.name
-  launch_template = aws_launch_template.ecs_launch_config.name
+  launch_configuration = aws_launch_template.ecs_launch_config.name
   desired_capacity     = 1
   min_size             = 0
   max_size             = 1
