@@ -358,7 +358,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
 
 resource "aws_launch_template" "ecs_launch_config" {
   name_prefix          = "goat"
-  iam_instance_profile = aws_iam_instance_profile.ecs-instance-profile.name
+  #iam_instance_profile = aws_iam_instance_profile.ecs-instance-profile.name
   image_id             = data.aws_ami.ecs_optimized_ami.id
   instance_type        = "t2.micro"
   security_groups      = [aws_security_group.ecs_sg.id]
