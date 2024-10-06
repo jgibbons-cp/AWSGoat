@@ -355,10 +355,20 @@ resource "aws_launch_configuration" "ecs_launch_config" {
   user_data            = data.template_file.user_data.rendered
   instance_type        = "t2.micro"
 }
+
+resource "aws_launch_template" "ecs_launch_config" {
+  name_prefix   = "goat"
+  iam_instance_profile = aws_iam_instance_profile.ecs-instance-profile.name
+  image_id      = data.aws_ami.ecs_optimized_ami.id
+  instance_type = "t2.micro
+  security_groups      = [aws_security_group.ecs_sg.id]"
+  user_data            = data.template_file.user_data.rendered
+}
+
 resource "aws_autoscaling_group" "ecs_asg" {
   name                 = "ECS-lab-asg"
   vpc_zone_identifier  = [aws_subnet.lab-subnet-public-1.id]
-  launch_configuration = aws_launch_configuration.ecs_launch_config.name
+  launch_configuration = aws_launch_template.ecs_launch_config.name
   desired_capacity     = 1
   min_size             = 0
   max_size             = 1
