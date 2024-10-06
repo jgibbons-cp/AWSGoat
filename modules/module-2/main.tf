@@ -359,7 +359,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
 resource "aws_launch_template" "ecs_launch_config" {
   image_id             = data.aws_ami.ecs_optimized_ami.id
   #security_groups      = [aws_security_group.ecs_sg.id]
-  user_data            = data.template_file.user_data.rendered
+  #user_data            = data.template_file.user_data.rendered
   instance_type        = "t2.micro"
 }
 
